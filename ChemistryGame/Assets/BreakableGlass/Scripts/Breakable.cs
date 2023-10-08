@@ -373,10 +373,6 @@ public	void RepairFunction (GameObject BrokenVersion){
 			ThisRigidbody.isKinematic = false;
 			}
 		}
-	//this re-enables the accessory (lid, cork, light). only works for FIRST child.
-		if (transform.childCount > 0){
-			transform.GetChild(0).gameObject.SetActive(true);
-		}
 
 		foreach (Renderer r in thingsToTurnBackOnOnRepair)
 			r.enabled = true;
