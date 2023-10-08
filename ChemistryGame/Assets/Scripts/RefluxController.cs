@@ -1,8 +1,6 @@
 using Assets.Scripts;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class RefluxController : MonoBehaviour
 {
@@ -54,10 +52,10 @@ public class RefluxController : MonoBehaviour
     // IEnumerator allows execution over several frames
     IEnumerator Reflux()
     {
-        yield return new WaitForSeconds(0.5f);
         boilingSFX.Play();
         boilingEffect.gameObject.SetActive(true);
         boilingEffect1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
         boilingEffectBubbles.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         successSFX.Play();

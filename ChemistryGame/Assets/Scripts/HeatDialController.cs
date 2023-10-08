@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Events;
 using Assets.Scripts;
 
 public class HeatDialController : MonoBehaviour
 {
+    private const float MAX_TEMP_PROPORTION = 0.6f;
+    private const float MIN_TEMP_PROPORTION = 0.2f;
     // The HeatDialController class handles functions related to the dial on the hotplate
 
     // Initialize Unity Events, which communicate when a mistake has been made and when it has been corrected
@@ -37,14 +36,14 @@ public class HeatDialController : MonoBehaviour
     private void HandleTriggers()
     {
         // If the heat is too high, triggers an error event.
-        if (!eventHasBeenTriggered && dial.Value >= 0.5)
+        if (!eventHasBeenTriggered && dial.Value >= MAX_TEMP_PROPORTION)
         {
             whiteboard.RaiseMessage(WhiteboardMessage.HEAT_ERROR);
             eventHasBeenTriggered = true;
         } 
 
         // Triggers correction event when heat is lowered
-        else if (eventHasBeenTriggered && dial.Value < 0.5)
+        else if (eventHasBeenTriggered && dial.Value < MAX_TEMP_PROPORTION)
         {
             whiteboard.RemoveMessage(WhiteboardMessage.HEAT_ERROR);
             eventHasBeenTriggered = false;
@@ -53,11 +52,11 @@ public class HeatDialController : MonoBehaviour
 
     public bool IsTooHot()
     {
-        return dial.Angle >= 0.5;
+        return dial.Angle >= MAX_TEMP_PROPORTION;
     }
 
     public bool IsReady()
     {
-        return dial.Angle >= 0.2 && dial.Angle < 0.5;
+        return dial.Angle >= MIN_TEMP_PROPORTION && dial.Angle < MAX_TEMP_PROPORTION;
     }
 }

@@ -39,7 +39,7 @@ public class FlaskController : MonoBehaviour
     // Returns a bool value which indicates that the flask is in its correct state for reflux success
     public bool IsReady()
     {
-        return flask.liquidAmount >= 0.49 && hotplateSocket.hasSelection &&
+        return flask.liquidAmount >= 0.4 && hotplateSocket.hasSelection &&
                flaskSocket.hasSelection && HasAntiBumpingGranules();
     }
 
